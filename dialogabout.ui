@@ -12,8 +12,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>395</width>
-    <height>220</height>
+    <width>517</width>
+    <height>422</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -36,6 +36,12 @@
 	border: 0px;
 	border-radius: 10px;
 	background: QLinearGradient(x1: 0, y1: 0.35, x2: 0, y2: 1, stop: 0 #222, stop: 1 #555);
+	font: 10pt &quot;MS Shell Dlg 2&quot;;
+}
+
+#groupBox {
+	color: #bbb;
+	border: 0px;
 	font: 10pt &quot;MS Shell Dlg 2&quot;;
 }
 
@@ -82,7 +88,7 @@
      <widget class="QLabel" name="SNLogo">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>20</x>
         <y>10</y>
         <width>131</width>
         <height>101</height>
@@ -98,22 +104,22 @@
      <widget class="QLabel" name="labelSN">
       <property name="geometry">
        <rect>
-        <x>160</x>
-        <y>20</y>
-        <width>74</width>
+        <x>170</x>
+        <y>30</y>
+        <width>321</width>
         <height>16</height>
        </rect>
       </property>
       <property name="text">
-       <string>ShaderNinja</string>
+       <string>ShaderNinja version 1.0.0</string>
       </property>
      </widget>
      <widget class="QLabel" name="labelAuthor">
       <property name="geometry">
        <rect>
-        <x>160</x>
-        <y>80</y>
-        <width>91</width>
+        <x>170</x>
+        <y>70</y>
+        <width>321</width>
         <height>16</height>
        </rect>
       </property>
@@ -121,24 +127,11 @@
        <string>By Maxim Blinov</string>
       </property>
      </widget>
-     <widget class="QLabel" name="labelVersion">
-      <property name="geometry">
-       <rect>
-        <x>160</x>
-        <y>40</y>
-        <width>161</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Version 1</string>
-      </property>
-     </widget>
      <widget class="QPushButton" name="buttonOk">
       <property name="geometry">
        <rect>
-        <x>290</x>
-        <y>170</y>
+        <x>410</x>
+        <y>370</y>
         <width>75</width>
         <height>23</height>
        </rect>
@@ -153,15 +146,78 @@
      <widget class="QLabel" name="labelCompilationDate1">
       <property name="geometry">
        <rect>
-        <x>160</x>
-        <y>60</y>
-        <width>141</width>
+        <x>170</x>
+        <y>50</y>
+        <width>321</width>
         <height>16</height>
        </rect>
       </property>
       <property name="text">
        <string>Built 11/09/2015</string>
       </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>120</y>
+        <width>461</width>
+        <height>241</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>GNU General Public License</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignHCenter|Qt::AlignTop</set>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
+      </property>
+      <widget class="QPlainTextEdit" name="textEditLicense">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>441</width>
+         <height>211</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>MS Shell Dlg 2</family>
+         <pointsize>10</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Plain</enum>
+       </property>
+       <property name="lineWidth">
+        <number>1</number>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+       <property name="plainText">
+        <string notr="true">This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</string>
+       </property>
+       <property name="centerOnScroll">
+        <bool>false</bool>
+       </property>
+      </widget>
      </widget>
     </widget>
    </item>
