@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DialogAbout</class>
+ <widget class="QDialog" name="DialogAbout">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>395</width>
+    <height>220</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="mouseTracking">
+   <bool>false</bool>
+  </property>
+  <property name="windowTitle">
+   <string>About ShaderNinja</string>
+  </property>
+  <property name="windowOpacity">
+   <double>1.000000000000000</double>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">#mainFrame {
+	border: 0px;
+	border-radius: 10px;
+	background: QLinearGradient(x1: 0, y1: 0.35, x2: 0, y2: 1, stop: 0 #222, stop: 1 #555);
+	font: 10pt &quot;MS Shell Dlg 2&quot;;
+}
+
+#buttonOk {
+	border-radius: 5px;
+	background: QLinearGradient(x1: 0, y1: 0.35, x2: 0, y2: 1, stop: 0 #666, stop: 1 #999);
+}
+
+#labelCompilationDate1 {
+	font: 10pt &quot;MS Shell Dlg 2&quot;;
+	color: #888;
+}
+
+#labelSN {
+	font: 10pt &quot;MS Shell Dlg 2&quot;;
+	color: #888;
+}
+
+#labelVersion {
+	font: 10pt &quot;MS Shell Dlg 2&quot;;
+	color: #888;
+}
+
+#labelAuthor {
+	font: 10pt &quot;MS Shell Dlg 2&quot;;
+	color: #888;
+}</string>
+  </property>
+  <property name="modal">
+   <bool>true</bool>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QFrame" name="mainFrame">
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
+     </property>
+     <widget class="QLabel" name="SNLogo">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>131</width>
+        <height>101</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap resource="icons.qrc">:/icons/icons/snlogo128.png</pixmap>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelSN">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>20</y>
+        <width>74</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>ShaderNinja</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelAuthor">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>80</y>
+        <width>91</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>By Maxim Blinov</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelVersion">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>40</y>
+        <width>161</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Version 1</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="buttonOk">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>170</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Ok</string>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelCompilationDate1">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>60</y>
+        <width>141</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Built 11/09/2015</string>
+      </property>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="icons.qrc"/>
+ </resources>
+ <connections/>
+</ui>

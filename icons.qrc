@@ -1,0 +1,23 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>icons/arrow_redo.png</file>
+        <file>icons/arrow_redo_bw.png</file>
+        <file>icons/arrow_refresh.png</file>
+        <file>icons/arrow_undo.png</file>
+        <file>icons/arrow_undo_bw.png</file>
+        <file>icons/bullet_go.png</file>
+        <file>icons/cut.png</file>
+        <file>icons/folder_page.png</file>
+        <file>icons/folder_page_white.png</file>
+        <file>icons/page.png</file>
+        <file>icons/page_add.png</file>
+        <file>icons/page_copy.png</file>
+        <file>icons/page_paste.png</file>
+        <file>icons/page_save.png</file>
+        <file>icons/page_white_add.png</file>
+        <file>icons/paste_plain.png</file>
+        <file>icons/door_open.png</file>
+        <file>icons/help.png</file>
+        <file>icons/snlogo128.png</file>
+    </qresource>
+</RCC>
