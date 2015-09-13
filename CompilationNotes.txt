@@ -1,0 +1,67 @@
+Here I make several remarks regarding the compilation of this program.
+
+Although The Qt Library is supposed to be cross-platform, do not expect this program to be so. I have not tried to
+compile this program on any operating system other than mine (Windows 8.1) or computer other than mine (PC).
+
+Similarly, I cannot say that any other tools other than those that I used will work - again, nothing else has been tested.
+
+Environent for compilation: 
+ - Windows 8.1
+ - MSVC 2013 Express 32 bit
+ - Qt 5.5 32 bit (MSVC Version)
+ - Qt Installer Framework 2.0.1 Precompiled binary (for the installer only)
+
+To have the following in one's Path environment variable allows the .bat files to call the correlating programs; Also, they're generally convenient.
+ - C:\Qt\Qt5.5.0\5.5\msvc2013\bin   (For the windeployqt.exe - copies any Qt libraries the .exe is dependant on)
+ - C:\Qt\QtIFW2.0.1\bin             (For generating the installer. The primary program here is binarycreator.exe)
+
+
+Qt-Installer notes:
+
+Unfortunately, I could not leave the /sn.coreapp/ installer component /data/ directory with some examples - otherwise the
+binarycreator simply includes it into the final installation package. Also, it takes far too long to git push the repo.
+Therefore, I write some instructions here instead.
+
+To create a new installer with a new executable, the newly-compiled executable should be placed into the /sn.coreapp/data/
+directory. Then, navigating to said directory in cmd.exe, enter
+	windeployqt ShaderNinja.exe
+to automatically copy in all the needed libraries or files, such as Qt5Core.dll. You can copy the dll's by hand also - 
+The usual list of dll's/files should be:
+	- D3DCompiler_47.dll
+	- libEGL.dll
+	- libGLESV2.dll
+	- opengl32sw.dll
+	- Qt5Core.dll
+	- Qt5Gui.dll
+	- Qt5Svg.dll
+	- Qt5Widgets.dll
+	- ShaderNinja.exe
+	- ShaderNinja.ico
+	- /iconengines
+	-   qsvgicon.dll
+	- /iamgeformats
+	-   qdds.dll
+	-   qgif.dll
+	-   qicns.dll
+	-   qico.dll
+	-   qjp2.dll
+	-   qjpeg.dll
+	-   qmng.dll
+	-   qsvg.dll
+	-   qtga.dll
+	-   qtiff.dll
+	-   qwbmp.dll
+	-   qwebp.dll
+	- /platforms
+	-   qwindows.dll
+...Along with translation folders and files.
+
+When arranging all these, don't leave out the icon - that is used by the /sn.desktopicon/ component should the user want a desktop icon.
+
+Use 7zip to pack the whole thing up into data.7z
+
+Don't leave anything else other than data.7z in the directory, otherwise the binarycreator has a tendency
+to also include anything else you have in that directory.
+
+At the top level directory, presuming you have the binarycreator.exe in your Path variable, the rebuild.bat file should
+recreate the installer from the given files.
