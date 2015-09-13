@@ -27,30 +27,20 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    loadSettings();
 
-    setupTrickyWidgets();
+    filePathShaderSource.clear();
 
     compilationTimer = new QTimer(this);
     compilationTimer->setInterval(1000);
 
-    filePathShaderSource.clear();
+    connectGenericActions();
 
+    setupTrickyWidgets();
     setupShaderEditor();
 
     connect(ui->viewport, &GLWidget::shaderCompiled,
             this, &MainWindow::printCompilationLog);
-
-    //Connect generic actions
-    connect(ui->actionNew, &QAction::triggered,
-            this, &MainWindow::createNewFile);
-    connect(ui->actionOpen, &QAction::triggered,
-            this, &MainWindow::openNewFile);
-    connect(ui->actionSave, &QAction::triggered,
-            this, &MainWindow::saveFile);
-    connect(ui->actionSave_As, &QAction::triggered,
-            this, &MainWindow::saveFileAs);
-    connect(ui->actionQuit, &QAction::triggered,
-            this, &MainWindow::close);
 
     //Connect compilation buttons
     connect(ui->actionCompile, &QAction::triggered,
@@ -66,6 +56,32 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow() {
     delete ui;
+}
+
+void MainWindow::saveSettings() {
+
+    QSettings settings("Maxim Blinov", "ShaderNinja", this);
+    settings.beginGroup("Generic");
+    settings.setValue("MainWindowDimensions", geometry());
+    settings.setValue("editPaneSplitterSize", ui->splitterEditPane->saveState());
+    settings.setValue("workspaceSplitterSize", ui->splitterWorkspace->saveState());
+    settings.endGroup();
+
+}
+
+void MainWindow::loadSettings() {
+
+    QSettings settings("Maxim Blinov", "ShaderNinja", this);
+    settings.beginGroup("Generic");
+    setGeometry( settings.value("MainWindowDimensions", QRect(120, 180, 1000, 500) ).toRect() );
+    ui->splitterEditPane->restoreState( settings.value("editPaneSplitterSize").toByteArray() );
+    ui->splitterWorkspace->restoreState( settings.value("workspaceSplitterSize").toByteArray() );
+
+    //lastFileSavePath is assigned recursively to make sure that it is never equal to null -
+    //this negates the need of using any local variables to store the QString,
+    //and the value can be safely retrieved whenever it is needed in the code.
+    settings.value("lastFileSavPath", settings.value("lastFileSavePath", QDir::currentPath() ).toString() );
+    settings.endGroup();
 }
 
 void MainWindow::setupTrickyWidgets() {
@@ -107,6 +123,31 @@ void MainWindow::setupShaderEditor() {
             ui->textEditShaderProgram, &QPlainTextEdit::redo);
 }
 
+void MainWindow::connectGenericActions() {
+
+    //Connect generic actions
+    connect(ui->actionNew, &QAction::triggered,
+            this, &MainWindow::createNewFile);
+    connect(ui->actionOpen, &QAction::triggered,
+            this, &MainWindow::openNewFile);
+    connect(ui->actionSave, &QAction::triggered,
+            this, &MainWindow::saveFile);
+    connect(ui->actionSave_As, &QAction::triggered,
+            this, &MainWindow::saveFileAs);
+    connect(ui->actionQuit, &QAction::triggered,
+            this, &MainWindow::close);
+}
+
+void MainWindow::reloadDefaultShader() {
+    //Load default shader source
+    QFile defaultShader(":/shader/defaultshaders/fragment.txt");
+    defaultShader.open(QIODevice::ReadOnly);
+
+    QTextStream strin(&defaultShader);
+    ui->textEditShaderProgram->appendPlainText(strin.readAll());
+    defaultShader.close();
+}
+
 void MainWindow::printCompilationLog(QString log) {
     ui->textEditMessageLog->appendPlainText(log);
 }
@@ -146,18 +187,28 @@ void MainWindow::createNewFile() {
     //Clear the file path variable to prevent overwriting the previous file
     filePathShaderSource.clear();
     ui->textEditShaderProgram->clear();
+    reloadDefaultShader();
 }
 
 void MainWindow::openNewFile() {
-    //File filters
+    //File filters (not used for anything)
     QString selectedFilter;
+
+    //Load the last used save path for convenience
+    QSettings settings("Maxim Blinov", "ShaderNinja");
+    settings.beginGroup("Generic");
 
     filePathShaderSource = QFileDialog::getOpenFileName(this,
                                                         "Open Shader Source",
-                                                        QDir::currentPath(),
+                                                        settings.value("lastSaveFilePath").toString(),
                                                         "All Files (*) ;; GLSL Source File (*.txt *.glsl *.frag)",
                                                         &selectedFilter,
                                                         nullptr);
+
+    //Resave the (potentially) new last used filepath name to the persistent QSettings
+    settings.setValue("lastSaveFilePath", filePathShaderSource);
+    settings.endGroup();
+
     if(!filePathShaderSource.isEmpty()) {
         QFile fileShaderSource(filePathShaderSource);
         fileShaderSource.open(QIODevice::ReadOnly);
@@ -183,14 +234,24 @@ void MainWindow::saveFile() {
 }
 
 void MainWindow::saveFileAs() {
-    //Check if trying to save an empty file
+    //Confirm that the user is not trying to save an empty file
     if(ui->textEditShaderProgram->toPlainText() != "") {
+        //Load up the settings to point dialog to the last directory used, for convenience
+        QSettings settings("Maxim Blinov", "ShaderNinja", this);
+        settings.beginGroup("Generic");
+
         filePathShaderSource = QFileDialog::getSaveFileName(this,
                                                             "Save Shader Source",
-                                                            QDir::currentPath(),
+                                                            settings.value("lastSaveFilePath").toString(),
                                                             "GLSL Source File (*.frag) ;; Text file (*.txt)",
                                                             nullptr,
                                                             nullptr);
+
+        //Resave the (potentially) new last used filepath name to the persistent QSettings
+        settings.setValue("lastSaveFilePath", filePathShaderSource);
+        settings.endGroup();
+
+        //Now the file is saved
         QFile fileShaderSource(filePathShaderSource);
         fileShaderSource.open(QIODevice::WriteOnly);
         fileShaderSource.write( ui->textEditShaderProgram->toPlainText().toUtf8().data() );
@@ -198,9 +259,13 @@ void MainWindow::saveFileAs() {
     }
 }
 
-void MainWindow::safeQuit() {
-
+void MainWindow::closeEvent(QCloseEvent *event) {
+    //By re-implementing closeEvent, the saveSettings function is called even if the window
+    //is closed by dialog operations (e.g. by pressing x or double clicking the top-left icon
+    saveSettings();
+    event->accept();
 }
+
 
 void MainWindow::launchDialogAbout() {
     DialogAbout dialog(this);

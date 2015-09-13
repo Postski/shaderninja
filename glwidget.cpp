@@ -25,8 +25,6 @@ GLWidget::GLWidget(QWidget *parent)
     : QOpenGLWidget(parent),
       shaderProgram(new QOpenGLShaderProgram(parent))
 {
-    setMinimumWidth(240);
-
     time = new QTime(0, 0, 0, 0);
     framerate = new QTimer(parent);
     framerate->setInterval(1000/45);

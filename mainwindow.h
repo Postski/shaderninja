@@ -29,6 +29,7 @@
 #include <QMainWindow>
 #include <QFileDialog>
 #include <QDir>
+#include <QSettings>
 
 #include <QTimer>
 #include <QString>
@@ -44,15 +45,18 @@ class MainWindow : public QMainWindow
 
     Ui::MainWindow *ui;
 
+    void connectGenericActions();
     void setupTrickyWidgets();
     void setupShaderEditor();
     void setupMessageLog();
+
+    void saveSettings();
+    void loadSettings();
 
     QTimer *compilationTimer;
     QSpinBox *spinboxCompilationDelay;
 
     QString filePathShaderSource;
-    bool isModified;
 
 public:
     explicit MainWindow(QWidget *parent = 0);
@@ -62,6 +66,7 @@ public slots:
     void resetCompilationTimer(int delay);
     void resetCompilationTimer();
 
+    void reloadDefaultShader();
     void resendSourceCode();
     void enableAutoCompilation(bool enableflag);
 
@@ -74,7 +79,7 @@ public slots:
 
     void launchDialogAbout();
 
-    void safeQuit();
+    void closeEvent(QCloseEvent *);
 };
 
 #endif // MAINWINDOW2_H
