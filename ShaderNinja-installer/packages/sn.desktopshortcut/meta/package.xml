@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<Package>
+    <DisplayName>ShaderNinja desktop shortcut</DisplayName>
+    <Description>Create a desktop shortcut for ShaderNinja</Description>
+    <Version>1.0.0</Version>
+    <ReleaseDate>2015-09-12</ReleaseDate>
+	<Default>true</Default>
+	<Dependancies>sn.coreapp</Dependancies>
+	<Script>installscript.qs</Script>
+	<SortingPriority>0</SortingPriority>
+</Package>

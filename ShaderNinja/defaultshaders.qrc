@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/shader">
+        <file>defaultshaders/vertex.txt</file>
+        <file>defaultshaders/fragment.txt</file>
+    </qresource>
+    <qresource prefix="/samples">
+        <file>shadersamples/blinking.frag</file>
+        <file>shadersamples/crosspillars.frag</file>
+        <file>shadersamples/dicomponalblinking.frag</file>
+        <file>shadersamples/dynamicpillars.frag</file>
+        <file>shadersamples/pillars.frag</file>
+        <file>shadersamples/solid.frag</file>
+    </qresource>
+</RCC>

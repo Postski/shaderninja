@@ -1,0 +1,7 @@
+To generate the core installation package:
+1. compile the .exe (or use the precompiled one already present here, in which case skip step 2).
+2. move the .exe here.
+3. call deploywinqt.exe passing the .exe as the parameter (or manually add the libraries). The ones here are
+   the latest as of 13/09/2015.
+   Note that, providing windeployqt.exe is in your Path variable and you're on windows, regen-libs.bat will do this for you.
+4. pack everything up (apart from this and the .bat file) into a data.7z file

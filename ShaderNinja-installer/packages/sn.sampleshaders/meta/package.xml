@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<Package>
+    <DisplayName>ShaderNinja Sample Shaders</DisplayName>
+    <Description>Several sample shaders to run in ShaderNinja</Description>
+    <Version>1.0.0</Version>
+    <ReleaseDate>2015-09-13</ReleaseDate>
+	<Default>true</Default>
+	<Dependancies>sn.coreapp</Dependancies>
+	<SortingPriority>50</SortingPriority>
+</Package>
