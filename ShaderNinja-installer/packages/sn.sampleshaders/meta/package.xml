@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <Package>
-    <DisplayName>ShaderNinja Sample Shaders</DisplayName>
+    <DisplayName>ShaderNinja sample shaders</DisplayName>
     <Description>Several sample shaders to run in ShaderNinja</Description>
     <Version>1.0.0</Version>
     <ReleaseDate>2015-09-13</ReleaseDate>
