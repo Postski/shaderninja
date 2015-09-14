@@ -1,3 +1,7 @@
+ShaderNinja - A live OpenGL fragment shader compiler and viewer
+
+[]ShaderNinja on SourceForge](https://sourceforge.net/projects/shaderninja/)
+
 Here I make several remarks regarding the compilation of this program.
 
 Although The Qt Library is supposed to be cross-platform, do not expect this program to be so. I have not tried to
