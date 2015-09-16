@@ -5,5 +5,8 @@ uniform vec2 resolution;
 out vec3 color;
 
 void main() {
-    color = vec3(0, 0, abs(sin(time)) );
+    float circle1 = sin ((sqrt(pow(resolution.x / 2.0 - gl_FragCoord.x, 2.0) + pow((resolution.y / 2.0 - gl_FragCoord.y), 2.0)) + time * -16.0)/ 8.0);
+    float circle2 = sin (sqrt(pow((resolution.x / 2.0) + sin(time) * 32.0 - gl_FragCoord.x, 2.0) + pow(((resolution.y / 2.0) + cos(time) * 32.0 - gl_FragCoord.y), 2.0)) + time * -16.0);
+
+    color = vec3(circle1 + circle2, 0, 0);
 }
